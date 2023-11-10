@@ -1,0 +1,72 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body id="body">
+  <div class="container mx-auto text-center">
+    <img src="{% static 'images/logo.png' %}" class="bg-dark" height="200px" alt="">
+  </div>
+    <h1 class="bg-dark text-center p-3 text-uppercase fw-bold" id="h">students details</h1>
+    
+    <div class="text-center ms-auto ps-3" >
+        <h2 style="display: inline;" class="text-light pe-3">{{request.user.first_name}}</h2>
+        <a href="{% url 'logout' %}"  class="btn btn-outline-danger text-light text-uppercase fw-bold">Log out</a>
+    </div>
+
+    <table class="table table-striped table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Register Number</th>
+            <th>Date of Birth</th>
+            <th>Course</th>
+            <th>students Image</th>
+            <th></th>
+        </tr>
+        {% for i in std %}
+        <tr>
+            <td>{{i.Name}}</td>
+            <td>{{i.reg}}</td>
+            <td>{{i.dob}}</td>
+            <td>{{i.Course}}</td>
+            <td>
+                <img src="http://127.0.0.1:8000/{{i.simage}}" alt="not found" height="150px" width="200px">
+            </td>
+            <td>
+                <a href="{% url 'stddel' i.id %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'stdedit' i.id %}" class="btn btn-warning">Update</a>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+    <div class="text-center">
+      <a href="{% url 'stdadd' %}" class="btn btn-outline-info text-light text-uppercase fw-bold">add student</a>
+      <a href="{% url 'pro' %}" class="btn btn-outline-info text-light text-uppercase fw-bold">view profile</a>
+      
+    </div>
+
+
+
+
+</body>
+
+</html>
